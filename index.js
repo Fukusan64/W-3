@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const PORT = 3000;
 
 const parser = (text) => {
   const [,...cmdArr] = text.split(/@/).sort((a, b) => a[0] < b[0]);
@@ -21,7 +22,7 @@ const parser = (text) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-http.listen(3000, () => console.log('listening on http://localhost:3000'));
+http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
 
 io.on('connection', (socket) => {
   socket.on('exec', (data) => {
