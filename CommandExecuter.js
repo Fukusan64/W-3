@@ -17,11 +17,15 @@ module.exports = class CommandExecuter{
     return true;
   }
   update() {
-    if(!this.finish) {
+    if (!this.finish) {
       //TODO
       if (/*pin update and check finish flag*/) {
+        const cmd = this.execQueue.pop();
+        if(cmd === undefined) {
+          this.finish = true;
+          return;
+        }
         /* set next cmd */
-        /* check is finish and set finish flag*/
       }
     }
   }
