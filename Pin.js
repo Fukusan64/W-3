@@ -1,4 +1,4 @@
-class Pin {
+module.exports = class Pin {
   constructor(pinNum, deltaT) {
     this.pinNum = pinNum;
     this.deltaD = 0;
