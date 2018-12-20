@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 const PORT = 3000;
 
 const parser = (text) => {
-  const [,...cmdArr] = text.split(/@/).sort((a, b) => a[0] < b[0]);
+  const [,...cmdArr] = text.replace(/\n+/g,'\n').split(/@/).sort((a, b) => a[0] < b[0]);
   return cmdArr
     .map(e => {
       return e.replace(/button[0-9]/, '').trim().split('\n').map(e => {
