@@ -18,7 +18,6 @@ module.exports = class CommandExecuter{
   }
   update() {
     if (!this.finish) {
-      //TODO
       if (this.pins.filter(p=>!p.finish).map(p=>p.update()).every(e=>e)) {
         const cmd = this.execQueue.pop();
         if (cmd === undefined) {
@@ -35,7 +34,7 @@ module.exports = class CommandExecuter{
   }
 
   stop() {
-    this.execQueue.push({ sec: 0, pin1: 0, pin2: 0, pin3: 0, pin4: 0 });
+    this.execQueue.push({ sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 });
     this.finish = false;
   }
 }
