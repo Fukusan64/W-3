@@ -19,7 +19,7 @@ module.exports = class CommandExecuter{
   update() {
     if (!this.finish) {
       if (this.pins.filter(p=>!p.finish).map(p=>p.update()).every(e=>e)) {
-        const cmd = this.execQueue.pop();
+        const cmd = this.execQueue.shift();
         if (cmd === undefined) {
           this.finish = true;
           return;
@@ -34,7 +34,7 @@ module.exports = class CommandExecuter{
   }
 
   stop() {
-    this.execQueue.push({ sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 });
+    this.execQueue.unshift({ sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 }, { sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 });
     this.finish = false;
   }
 }
