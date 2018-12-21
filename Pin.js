@@ -6,6 +6,7 @@ module.exports = class Pin {
     this.targetD = 0;
     this.updateCount = 0;
     this.deltaT = deltaT;
+    this.finish = true;
   }
 
   update() {
@@ -14,16 +15,19 @@ module.exports = class Pin {
     if (this.updateCount <= 0) {
       this.d = this.targetD;
       console.log(this.pinNum, this.d);
+      this.finish = true;
       return true;
     } else {
       console.log(this.pinNum, this.d);
+      this.finish = false;
       return false;
     }
   }
 
-  setTargetD(d, msec) {
+  setTargetD(d, sec) {
+    this.finish = false;
     this.targetD = d;
-    this.updateCount = (msec * (1000 / this.deltaT));
+    this.updateCount = (sec * (1000 / this.deltaT));
     this.deltaD = (d - this.d) / this.updateCount;
   }
 }

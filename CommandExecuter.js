@@ -8,24 +8,28 @@ module.exports = class CommandExecuter{
     setInterval(()=>this.update(), deltaT);
   }
   setCmds(cmds) {
-    this.cmds = mcds;
+    this.cmds = cmds;
   }
   exec(funcNum) {
     if (!this.finish) return false;
-    this.execQueue = [...this.cmds[funcNum - 1]];
+    this.execQueue = [...(this.cmds[funcNum] || [])];
     this.finish = false;
     return true;
   }
   update() {
     if (!this.finish) {
       //TODO
-      if (/*pin update and check finish flag*/) {
+      if (this.pins.filter(p=>!p.finish).map(p=>p.update()).every(e=>e)) {
         const cmd = this.execQueue.pop();
-        if(cmd === undefined) {
+        if (cmd === undefined) {
           this.finish = true;
           return;
         }
-        /* set next cmd */
+        for (let i = 0;i < this.pins.length;i++) {
+          if (cmd[`pin${i + 1}`] !== undefined) {
+            this.pins[i].setTargetD(cmd[`pin${i + 1}`], cmd.sec);
+          }
+        }
       }
     }
   }
