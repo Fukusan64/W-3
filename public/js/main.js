@@ -39,6 +39,9 @@ const init = () => {
   document.getElementById('closeMessage').addEventListener('click', () => {
     messageBar.style.visibility = 'hidden';
   });
+  socket.on('info', (data) => message(data, 0));
+  socket.on('warn', (data) => message(data, 1));
+  socket.on('error', (data) => message(data, 2));
 }
 
 window.onload = () => {
