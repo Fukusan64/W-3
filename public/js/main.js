@@ -3,7 +3,11 @@ const socket = io();
 const message = (message, type = 0) => {
   const bar = document.getElementById('messageBar');
   document.getElementById('message').innerText = message;
-  [bar.style.backgroundColor,bar.style.color ] = [['#2096F3', 'white'], ['yellow', 'black'], ['red', 'white']][type];
+  [bar.style.backgroundColor,bar.style.color ] = [
+    ['#2096F3', 'white'],
+    ['yellow', 'black'],
+    ['red', 'white']
+  ][type];
   bar.style.visibility = 'visible';
 }
 
