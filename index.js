@@ -44,12 +44,12 @@ io.on('connection', (socket) => {
     const tasks = parser(data);
     console.log(tasks);
     executer.setCmds(tasks);
+    io.to(socket.id).emit('info', '実行準備完了！');
   });
   socket.on('funcButton', (index) => {
     console.log(`exec :${index}`, executer.finish);
     if (executer.finish)executer.exec(index);
     else {
-      console.log('emit warn');
       io.to(socket.id).emit('warn', 'コマンド実行中はボタンを押せません');
     }
   });

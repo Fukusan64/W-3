@@ -1,7 +1,10 @@
 const socket = io();
 
-const message = (message, type = 0) => {
+const message = (message, type = 0, sec = 0) => {
   const bar = document.getElementById('messageBar');
+  const timeoutID = bar.dataset.timeoutID;
+  if (timeoutID) clearTimeout(timeoutID);
+  bar.dataset.timeoutID = false;
   document.getElementById('message').innerText = message;
   [bar.style.backgroundColor,bar.style.color ] = [
     ['#2096F3', 'white'],
@@ -9,6 +12,12 @@ const message = (message, type = 0) => {
     ['red', 'white']
   ][type];
   bar.style.visibility = 'visible';
+  if (sec != 0){
+    bar.dataset.timeoutID = setTimeout(
+      () => bar.style.visibility = 'hidden',
+       sec * 1000
+    );
+  }
 }
 
 const editMode = () => {
@@ -39,7 +48,7 @@ const init = () => {
   document.getElementById('closeMessage').addEventListener('click', () => {
     messageBar.style.visibility = 'hidden';
   });
-  socket.on('info', (data) => message(data, 0));
+  socket.on('info', (data) => message(data, 0, 1));
   socket.on('warn', (data) => message(data, 1));
   socket.on('error', (data) => message(data, 2));
 }
