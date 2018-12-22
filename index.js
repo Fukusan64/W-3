@@ -46,8 +46,11 @@ io.on('connection', (socket) => {
     executer.setCmds(tasks);
   });
   socket.on('funcButton', (index) => {
-    console.log(`exec :${index}`);
+    console.log(`exec :${index}`, executer.finish);
     if (executer.finish)executer.exec(index);
-    else console.log('wait');
+    else {
+      console.log('emit warn');
+      io.to(socket.id).emit('warn', 'コマンド実行中はボタンを押せません');
+    }
   });
 });
