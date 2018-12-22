@@ -14,11 +14,11 @@ module.exports = class Pin {
     this.updateCount--;
     if (this.updateCount <= 0) {
       this.d = this.targetD;
-      console.log(this.pinNum, this.d);
+      console.log(this.pinNum, Math.round(this.d));
       this.finish = true;
       return true;
     } else {
-      console.log(this.pinNum, this.d);
+      console.log(this.pinNum, Math.round(this.d));
       this.finish = false;
       return false;
     }
