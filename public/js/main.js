@@ -1,5 +1,12 @@
 const socket = io();
 
+const message = (message, type = 0) => {
+  const bar = document.getElementById('messageBar');
+  document.getElementById('message').innerText = message;
+  [bar.style.backgroundColor,bar.style.color ] = [['#2096F3', 'white'], ['yellow', 'black'], ['red', 'white']][type];
+  bar.style.visibility = 'visible';
+}
+
 const editMode = () => {
   document.getElementById('exec').style.display = 'none';
   document.getElementById('editor').style.display = 'block';
@@ -20,10 +27,14 @@ const init = () => {
     if (modeButton.innerText == '編集') editMode();
     else execMode();
   });
-  console.log([...document.getElementsByClassName('functionButton')].map(e => {
+  [...document.getElementsByClassName('functionButton')].map(e => {
     const { index } = e.dataset;
     e.addEventListener('click', () => socket.emit('funcButton', index));
-  }));
+  });
+  const messageBar = document.getElementById('messageBar');
+  document.getElementById('closeMessage').addEventListener('click', () => {
+    messageBar.style.visibility = 'hidden';
+  });
 }
 
 window.onload = () => {
