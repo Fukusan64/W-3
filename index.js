@@ -20,7 +20,6 @@ const parser = (text) => {
       const bid = e.match(/button([0-9])/);
       cmdArr[Number(bid[1])] = e;
     })
-    
   ;
   return cmdArr
     .map(e => typeof e === 'string' ? e : '')
