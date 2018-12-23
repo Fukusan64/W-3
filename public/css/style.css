@@ -27,7 +27,7 @@ body {
 }
 #closeMessage{
   color: inherit;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(128,128,128,0.3);
   border: 1px solid;
   border-radius: 2px;
   position: absolute;
