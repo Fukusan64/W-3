@@ -71,4 +71,7 @@ io.on('connection', (socket) => {
       io.to(socket.id).emit('warn', 'コマンド実行中はボタンを押せません');
     }
   });
+  socket.on('edit', () => {
+    executer.stop();
+  });
 });

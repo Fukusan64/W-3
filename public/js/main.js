@@ -21,6 +21,7 @@ const message = (message, type = 0, sec = 0) => {
 }
 
 const editMode = () => {
+  socket.emit('edit', 'changeEditMode');
   document.getElementById('exec').style.display = 'none';
   document.getElementById('editor').style.display = 'block';
   document.getElementById('modeButton').innerText = '実行';

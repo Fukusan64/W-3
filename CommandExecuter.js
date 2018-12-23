@@ -36,7 +36,9 @@ module.exports = class CommandExecuter{
 
   stop() {
     console.log('!stop!');
-    this.execQueue.unshift({ sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 }, { sec: 0.5, pin1: 0, pin2: 0, pin3: 0, pin4: 0 });
+    this.execQueue = [];
+    this.cmds = [];
+    this.pins.map(e => e.stop());
     this.finish = false;
   }
 }

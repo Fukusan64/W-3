@@ -47,4 +47,15 @@ module.exports = class Pin {
     this.updateCount = (sec * (1000 / this.deltaT));
     this.deltaD = (d - this.d) / this.updateCount;
   }
+
+
+  stop() {
+    this.finish = true;
+    this.targetD = 0;
+    this.updateCount = 0;
+    this.deltaD = 0;
+    this.d = 0;
+    console.log(this.minusPin, 0);
+    console.log(this.plusPin, 0);
+  }
 }
