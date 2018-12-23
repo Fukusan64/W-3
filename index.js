@@ -30,7 +30,7 @@ const parser = (text) => {
     .map(e => {
       return e.replace(/button[0-9]/, '').trim().split('\n').map(e => {
         const [pinData, sec] = e.split(':');
-        if (!naturalNumberTest(sec)) {
+        if (!naturalNumberTest(sec.trim())) {
           throw `naturalNumberTest error (sec): ${sec}`;
         }
         const data = {sec: Number(sec)};
