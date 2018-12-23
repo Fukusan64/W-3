@@ -8,7 +8,7 @@ const Executer = require('./CommandExecuter');
 const PORT = 3000;
 const deltaTmsec = 100;
 
-const executer = new Executer([1,2,3,4], deltaTmsec);
+const executer = new Executer([1, 2, [30, 31], [40, 41]], deltaTmsec);
 
 const naturalNumberTest = str => /^[0-9]+$/.test(str);
 const numberTest = str => /^-?[0-9]+$/.test(str);

@@ -1,7 +1,8 @@
 const Pin = require('./Pin');
+const Md = require('./MotorDriver');
 module.exports = class CommandExecuter{
 	constructor(pinMumArray, deltaT) {
-    this.pins = pinMumArray.map(e => new Pin(e, deltaT));
+    this.pins = pinMumArray.map(e => typeof e === 'number' ? new Pin(e, deltaT) : new Md(e, deltaT));
     this.cmds = [];
     this.execQueue = [];
     this.finish = true;
