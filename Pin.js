@@ -2,6 +2,7 @@ const { Gpio } = require('pigpio');
 module.exports = class Pin {
   constructor(pinNum, deltaT) {
     this.pin = new Gpio(pinNum, {mode: Gpio.OUTPUT});
+    this.pinNum = pinNum;
     this.deltaD = 0;
     this.d = 0;
     this.targetD = 0;
