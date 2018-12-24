@@ -1,4 +1,4 @@
-module.exports = class Pin {
+module.exports = class MotorDriver {
   constructor([plusPin, minusPin], deltaT) {
     this.plusPin = plusPin;
     this.minusPin = minusPin;
