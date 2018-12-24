@@ -10,8 +10,8 @@ const deltaTmsec = 100;
 
 const executer = new Executer([19, 20, [30, 31], [40, 41]], deltaTmsec);
 
+const integerTest = str => /^-?[0-9]$/.test(str);
 const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
-const numberTest = str => /^-?([1-9]\d*|0)(\.\d+)?$/.test(str);
 const pinTest = str => /^pin[1-9]$/.test(str);
 
 const parser = (text) => {
@@ -39,8 +39,8 @@ const parser = (text) => {
           if (!pinTest(pin)) {
             throw `pinNameTest error (pinName): ${pin}`;
           }
-          if (!numberTest(e[1].trim())) {
-            throw `numberTest error (targetVal): ${e[1].trim()}`;
+          if (!integerTest(e[1].trim())) {
+            throw `integerTest error (targetVal): ${e[1].trim()}`;
           }
           data[e[0].trim()] = Number(e[1]);
         });
