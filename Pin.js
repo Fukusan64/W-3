@@ -16,13 +16,15 @@ module.exports = class Pin {
     this.updateCount--;
     if (this.updateCount <= 0) {
       this.d = this.targetD;
-      console.log(this.pinNum, Math.round(this.d));
-      this.pin.pwmWrite(Math.round(this.d));
+      const val = Math.round(this.d);
+      console.log(this.pinNum, val);
+      this.pin.pwmWrite(val);
       this.finish = true;
       return true;
     } else {
-      console.log(this.pinNum, Math.round(this.d));
-      this.pin.pwmWrite(Math.round(this.d));
+      const val = Math.round(this.d);
+      console.log(this.pinNum, val);
+      this.pin.pwmWrite(val);
       this.finish = false;
       return false;
     }
