@@ -10,8 +10,8 @@ const deltaTmsec = 100;
 
 const executer = new Executer([19, 20, [30, 31], [40, 41]], deltaTmsec);
 
-const naturalNumberTest = str => /^[0-9]+$/.test(str);
-const numberTest = str => /^-?[0-9]+$/.test(str);
+const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
+const numberTest = str => /^-?([1-9]\d*|0)(\.\d+)?$/.test(str);
 const pinTest = str => /^pin[1-9]$/.test(str);
 
 const parser = (text) => {
@@ -30,8 +30,8 @@ const parser = (text) => {
     .map(e => {
       return e.replace(/button[0-9]/, '').trim().split('\n').map(e => {
         const [pinData, sec] = e.split(':');
-        if (!naturalNumberTest(sec.trim())) {
-          throw `naturalNumberTest error (sec): ${sec}`;
+        if (!positiveNumberTest(sec.trim())) {
+          throw `positiveNumberTest error (sec): ${sec}`;
         }
         const data = {sec: Number(sec)};
         pinData.split(',').map(e => e.split('=')).forEach(e => {
