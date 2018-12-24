@@ -1,6 +1,7 @@
+const { GPIO } = require('pigpio');
 module.exports = class Pin {
   constructor(pinNum, deltaT) {
-    this.pinNum = pinNum;
+    this.pin = new Gpio(pinNum, {mode: Gpio.OUTPUT});
     this.deltaD = 0;
     this.d = 0;
     this.targetD = 0;
@@ -15,10 +16,12 @@ module.exports = class Pin {
     if (this.updateCount <= 0) {
       this.d = this.targetD;
       console.log(this.pinNum, Math.round(this.d));
+      this.pin.pwmWrite(Math.round(this.d));
       this.finish = true;
       return true;
     } else {
       console.log(this.pinNum, Math.round(this.d));
+      this.pin.pwmWrite(Math.round(this.d));
       this.finish = false;
       return false;
     }
