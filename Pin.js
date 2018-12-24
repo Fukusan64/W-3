@@ -42,5 +42,6 @@ module.exports = class Pin {
     this.deltaD = 0;
     this.d = 0;
     console.log(this.pinNum, 0);
+    this.pin.pwmWrite(0);
   }
 }
