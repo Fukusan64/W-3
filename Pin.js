@@ -1,4 +1,4 @@
-const { GPIO } = require('pigpio');
+const { Gpio } = require('pigpio');
 module.exports = class Pin {
   constructor(pinNum, deltaT) {
     this.pin = new Gpio(pinNum, {mode: Gpio.OUTPUT});
