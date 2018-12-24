@@ -10,7 +10,7 @@ const deltaTmsec = 100;
 
 const executer = new Executer([19, 20, [30, 31], [40, 41]], deltaTmsec);
 
-const integerTest = str => /^-?[0-9]$/.test(str);
+const integerTest = str => /^-?[0-9]+$/.test(str);
 const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
 const pinTest = str => /^pin[1-9]$/.test(str);
 
