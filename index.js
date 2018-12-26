@@ -13,20 +13,26 @@ const executer = new Executer(deltaTmsec);
 const integerTest = str => /^-?[0-9]+$/.test(str);
 const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
 const pinTest = str => /^pin[1-9]$/.test(str);
-const naturalNumberTest = str => /^[1-9]+$/.test(str);
+const naturalNumberTest = str => /^[0-9]+$/.test(str);
 
 const parser = (text) => {
-  const [pinText, codeText] = text.split(/(?<=#\w+)\n/);
+  let [pinText, codeText] = text.split(/(?<=#\w+)\n/);
+  pinText = pinText || '';
+  codeText = codeText || '';
   const cmdArr = [];
   const pinMap = [];
   pinText
+    .replace('#', '')
     .split(',')
     .map(e => e.split('='))
     .forEach((e) => {
       const [pin, num] = e.map(e => e.trim());
-      if (pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
-      if (naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
-      pinMap[num - 1] = Number(pin.replace('pin', ''));
+      if (!pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
+      const pinNum = Number(pin.replace('pin', '')) - 3;
+      if (pinNum < 0) throw `pinNum error :smaller than 3`;
+
+      if (!naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
+      pinMap[pinNum] = Number(num);
     });
   codeText
     .replace(/\n+/g,'\n')
