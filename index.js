@@ -78,6 +78,7 @@ io.on('connection', (socket) => {
       executer.setCmds(tasks);
       io.to(socket.id).emit('info', '実行準備完了！');
     } catch (e) {
+      console.error(e);
       io.to(socket.id).emit('error', e);
     }
   });
