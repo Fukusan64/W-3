@@ -24,8 +24,8 @@ const parser = (text) => {
     .map(e => e.split('='))
     .forEach((e) => {
       const [pin, num] = e.map(e => e.trim());
-      if (!pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
-      if (!naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
+      if (pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
+      if (naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
       pinMap[num - 1] = Number(pin.replace('pin', ''));
     });
   codeText
