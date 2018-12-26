@@ -14,10 +14,22 @@ executer.setPins([[23, 24], [25, 26], 19, 20]);
 const integerTest = str => /^-?[0-9]+$/.test(str);
 const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
 const pinTest = str => /^pin[1-9]$/.test(str);
+const naturalNumberTest = str => /^[1-9]+$/.test(str);
 
 const parser = (text) => {
-  const cmdArr = []
-  text
+  const [pinText, codeText] = text.split(/(?<=#\w+)\n/);
+  const cmdArr = [];
+  const pinMap = [];
+  pinText
+    .split(',')
+    .map(e => e.split('='))
+    .forEach((e) => {
+      const [pin, num] = e.map(e => e.trim());
+      if (!pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
+      if (!naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
+      pinMap[num - 1] = Number(pin.replace('pin', ''));
+    });
+  codeText
     .replace(/\n+/g,'\n')
     .split(/@/)
     .filter(e => e !== '')
@@ -26,7 +38,7 @@ const parser = (text) => {
       cmdArr[Number(bid[1])] = e;
     })
   ;
-  return cmdArr
+  const tasks = cmdArr
     .map(e => typeof e === 'string' ? e : '')
     .map(e => {
       return e.replace(/button[0-9]/, '').trim().split('\n').map(e => {
@@ -48,6 +60,8 @@ const parser = (text) => {
         return data;
       });
     })
+  ;
+  return [pinMap, tasks];
 };
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -57,7 +71,9 @@ http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
 io.on('connection', (socket) => {
   socket.on('exec', (data) => {
     try {
-      const tasks = parser(data);
+      const [pinMap, tasks] = parser(data);
+      console.log(pinMap);
+      executer.setPins([[23, 24], [25, 26], ...pinMap]);
       console.log(tasks);
       executer.setCmds(tasks);
       io.to(socket.id).emit('info', '実行準備完了！');
