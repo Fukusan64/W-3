@@ -36,6 +36,7 @@ const parser = (text) => {
       pinMap[pinNum] = Number(num);
     });
   codeText
+    .trim()
     .replace(/\n+/g,'\n')
     .split(/@/)
     .filter(e => e !== '')
