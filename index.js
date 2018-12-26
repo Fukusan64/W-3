@@ -30,7 +30,7 @@ const parser = (text) => {
       const [pin, num] = e.map(e => e.trim());
       if (!pinTest(pin)) throw `pinTest error (set pin): ${pin}`;
       const pinNum = Number(pin.replace('pin', '')) - 3;
-      if (pinNum < 0) throw `pinNum error :smaller than 3`;
+      if (pinNum < 0) throw `pinNum error "smaller than 3": ${pin}`;
 
       if (!naturalNumberTest(num)) throw `naturalNumberTest error (set pin): ${num}`;
       pinMap[pinNum] = Number(num);
