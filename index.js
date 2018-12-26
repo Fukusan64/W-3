@@ -16,7 +16,8 @@ const pinTest = str => /^pin[1-9]$/.test(str);
 const naturalNumberTest = str => /^[0-9]+$/.test(str);
 
 const parser = (text) => {
-  let [pinText, codeText] = text.split(/(?<=#\w+)\n/);
+  let [pinText, codeText] = text.split(/(?<=#[^\n]+)\n/);
+  console.log([pinText, codeText]);
   pinText = pinText || '';
   codeText = codeText || '';
   const cmdArr = [];
