@@ -9,7 +9,6 @@ const PORT = 3000;
 const deltaTmsec = 100;
 
 const executer = new Executer(deltaTmsec);
-executer.setPins([[23, 24], [25, 26], 19, 20]);
 
 const integerTest = str => /^-?[0-9]+$/.test(str);
 const positiveNumberTest = str => /^([1-9]\d*|0)(\.\d+)?$/.test(str);
