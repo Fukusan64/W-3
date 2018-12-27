@@ -18,8 +18,10 @@ const naturalNumberTest = str => /^[0-9]+$/.test(str);
 const parser = (text) => {
   let [pinText, codeText] = text.replace(/\/\/[^\n]+/g,'').split(/(?<=#[^\n]+)\n/);
   console.log([pinText, codeText]);
-  pinText = pinText || '';
-  codeText = codeText || '';
+  if (!codeText) {
+    codeText = pinText;
+    pinText = '';
+  }
   const cmdArr = [];
   const pinMap = [];
   pinText
