@@ -17,16 +17,17 @@ const naturalNumberTest = str => /^[0-9]+$/.test(str);
 
 const parser = (text) => {
   let [pinText, codeText] = text.replace(/\/\/[^\n]+/g,'').split(/(?<=#[^\n]+)\n/);
-  console.log([pinText, codeText]);
   if (!codeText) {
     codeText = pinText;
     pinText = '';
   }
+  console.log([pinText, codeText]);
   const cmdArr = [];
   const pinMap = [];
   pinText
     .replace('#', '')
     .split(',')
+    .filter(e => e !== '')
     .map(e => e.split('='))
     .forEach((e) => {
       const [pin, num] = e.map(e => e.trim());
