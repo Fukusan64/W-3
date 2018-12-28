@@ -7,6 +7,8 @@ const Executer = require('./CommandExecuter');
 
 const PORT = 3000;
 const deltaTmsec = 100;
+app.set("view engine", "ejs");
+app.use('/static', express.static('./public'));
 
 const executer = new Executer(deltaTmsec);
 
@@ -74,7 +76,13 @@ const parser = (text) => {
   return [pinMap, tasks];
 };
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+  res.render('./index.ejs');
+});
+
+app.get('/program/:name', (req, res) => {
+  res.render("./program.ejs", req.params);
+});
 
 http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
 

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Fukusan64/W-3#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "pigpio": "^1.2.0",
     "socket.io": "^2.2.0"
