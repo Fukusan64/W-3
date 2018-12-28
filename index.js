@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const http = require('http').Server(app);
 const pinController = require('./pinController');
 
 const PORT = 3000;
@@ -16,4 +17,4 @@ app.get('/program/:name', (req, res) => {
 });
 
 http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
-pinController(app);
+pinController(http);

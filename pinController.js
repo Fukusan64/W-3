@@ -1,5 +1,4 @@
-module.exports = (app) => {
-  const http = require('http').Server(app);
+module.exports = (http) => {
   const io = require('socket.io')(http);
   const Executer = require('./CommandExecuter');
   const parser = require('./parser');
