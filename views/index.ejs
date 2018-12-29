@@ -7,6 +7,10 @@
   <title>W*3</title>
 </head>
 <body>
-  <h1>root content</h1>
+  <lu>
+    <% fileList.forEach(e => { %>
+      <li><%= e %></li>
+    <% }); %>
+  </lu>
 </body>
 </html>
