@@ -19,5 +19,12 @@ app.get('/program/:name', (req, res) => {
   res.render("./program.ejs", req.params);
 });
 
+app.use((req, res, next) => {
+  res.status(404).send('404 not found');
+});
+
+app.use((err, req, res) => {
+	res.status(500).send('500 error! : ' + err);
+});
 http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
 pinController(http);
