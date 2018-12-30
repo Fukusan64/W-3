@@ -37,4 +37,4 @@ app.use((err, req, res, next) => {
 	res.status(500).send('500 error! : ' + err);
 });
 http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
-//pinController(http, fm);
+pinController(http, fm);
