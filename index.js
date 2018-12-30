@@ -16,11 +16,16 @@ app.get('/', (req, res) => {
 });
 
 app.get('/program/:name', (req, res) => {
-  try {
-    const body = fm.readFile(req.params.name);
-    res.render("./program.ejs", { name: req.params, body });
-  } catch(e) {
-    res.status(404).send('404 not found');
+  if (fm.getFileList().some(e => e == req.params.name)) {
+    res.render("./program.ejs", {
+      name: req.params,
+      body: fm.readFile(req.params.name),
+    });
+  } else {
+    res.render("./program.ejs", {
+      name: req.params,
+      body: '',
+    });
   }
 });
 
