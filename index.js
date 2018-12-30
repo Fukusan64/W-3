@@ -23,7 +23,7 @@ app.get('/program/:name', (req, res) => {
     });
   } else {
     res.render("./program.ejs", {
-      name: req.params,
+      name: req.params.name,
       body: '',
     });
   }
