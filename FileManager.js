@@ -11,4 +11,7 @@ module.exports = class FileManager {
       .filter(e => filter(e))
     ;
   }
+  readFile(fileName) {
+    return fs.readFileSync(path.join(this.dirPath, fileName));
+  }
 }

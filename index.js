@@ -16,7 +16,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/program/:name', (req, res) => {
-  res.render("./program.ejs", req.params);
+  try {
+    const body = fm.readFile(req.params.name);
+    res.render("./program.ejs", { name: req.params, body });
+  } catch(e) {
+    res.status(404).send('404 not found');
+  }
 });
 
 app.use((req, res, next) => {
