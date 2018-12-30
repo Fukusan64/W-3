@@ -41,7 +41,7 @@ module.exports = (http, fm) => {
           socket.emit('warn', 'コマンド実行中はボタンを押せません');
         }
       });
-      socket.on('save', (name, body) => {
+      socket.on('save', ({name, body}) => {
         try {
           fm.writeFile(name, body);
           socket.emit('info', '保存完了');

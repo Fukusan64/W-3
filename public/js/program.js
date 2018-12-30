@@ -49,6 +49,9 @@ const init = () => {
   document.getElementById('closeMessage').addEventListener('click', () => {
     messageBar.style.visibility = 'hidden';
   });
+  document.getElementById('saveButton').addEventListener('click', () => {
+    socket.emit('save', {name: NAME, body: document.getElementById('editor').children[0].value});
+  });
   socket.on('connect', () => message('W*3本体へ接続成功！', 0, 1));
   socket.on('disconnect', () => message('W*3本体との通信が切断されました', 2));
 
