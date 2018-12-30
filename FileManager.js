@@ -14,4 +14,7 @@ module.exports = class FileManager {
   readFile(fileName) {
     return fs.readFileSync(path.join(this.dirPath, fileName));
   }
+  writeFile(fileName, body) {
+    fs.writeFileSync(path.join(this.dirPath, fileName), body);
+  }
 }

@@ -1,4 +1,4 @@
-module.exports = (http) => {
+module.exports = (http, fm) => {
   const io = require('socket.io')(http);
   const Executer = require('./CommandExecuter');
   const parser = require('./parser');
@@ -39,6 +39,15 @@ module.exports = (http) => {
           executer.exec(index);
         } else {
           socket.emit('warn', 'コマンド実行中はボタンを押せません');
+        }
+      });
+      socket.on('save', (name, body) => {
+        try {
+          fm.writeFile(name, body);
+          socket.emit('info', '保存完了');
+        } catch (e) {
+          console.log(e);
+          socket.emit('error', e);
         }
       });
       socket.on('edit', () => {
