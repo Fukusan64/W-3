@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 app.get('/program/:name', (req, res) => {
   if (fm.getFileList().some(e => e == req.params.name)) {
     res.render("./program.ejs", {
-      name: req.params,
+      name: req.params.name,
       body: fm.readFile(req.params.name),
     });
   } else {
@@ -37,4 +37,4 @@ app.use((err, req, res, next) => {
 	res.status(500).send('500 error! : ' + err);
 });
 http.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
-pinController(http, fm);
+//pinController(http, fm);
