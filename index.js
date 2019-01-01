@@ -20,11 +20,13 @@ app.get('/program/:name', (req, res) => {
     res.render("./program.ejs", {
       name: req.params.name,
       body: fm.readFile(req.params.name),
+      newFile: false,
     });
   } else {
     res.render("./program.ejs", {
       name: req.params.name,
       body: '',
+      newFile: true,
     });
   }
 });

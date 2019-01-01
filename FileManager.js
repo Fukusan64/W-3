@@ -17,4 +17,7 @@ module.exports = class FileManager {
   writeFile(fileName, body) {
     fs.writeFileSync(path.join(this.dirPath, fileName), body);
   }
+  deleteFile(fileName) {
+    fs.unlinkSync(path.join(this.dirPath, fileName));
+  }
 }

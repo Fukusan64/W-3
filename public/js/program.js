@@ -1,4 +1,5 @@
 const socket = io();
+let deleteFlag = false;
 
 const message = (message, type = 0, sec = 0) => {
   const bar = document.getElementById('messageBar');
@@ -52,8 +53,26 @@ const init = () => {
   document.getElementById('saveButton').addEventListener('click', () => {
     socket.emit('save', {name: NAME, body: document.getElementById('editor').children[0].value});
   });
+  document.getElementById('deleteButton').addEventListener('click', () => {
+    socket.emit('delete', NAME);
+  });
+  socket.on('delete res', (e) => {
+    if(e) {
+      message('削除に失敗しました', 2);
+      console.error(e);
+    } else {
+      deleteFlag = true;
+      socket.disconnect();
+      message('プログラムを削除しました,3秒後にトップページに戻ります', 0);
+      setTimeout(()=> window.location.href='/', 3000);
+    }
+  });
   socket.on('connect', () => message('W*3本体へ接続成功！', 0, 1));
-  socket.on('disconnect', () => message('W*3本体との通信が切断されました', 2));
+  socket.on('disconnect', () => {
+    if (!deleteFlag) {
+      message('W*3本体との通信が切断されました', 2);
+    }
+  });
 
   socket.on('info', (data) => message(data, 0, 1));
   socket.on('warn', (data) => message(data, 1));

@@ -14,7 +14,7 @@
   </div>
 	<div id="editor">
     <textarea><%= body %></textarea>
-    <a id="backLink" href="/">プログラム一覧に戻る</a>
+    <a id="backLink" href="/">一覧</a>
   </div>
   <div id="exec">
     <div id="wrapper"><button class="functionButton" data-index="1">1</button></div>
@@ -23,6 +23,9 @@
     <div id="wrapper"><button class="functionButton" data-index="4">4</button></div>
   </div>
   <div id="controllButtons">
+    <% if (!newFile) { %>
+      <button id="deleteButton" class="button deleteButton">削除</button>
+    <% } %>
     <button id="saveButton" class="button">保存</button>
     <button id="modeButton" class="button">編集</button>
   </div>

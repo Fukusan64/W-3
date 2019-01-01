@@ -64,6 +64,11 @@ body {
   border: 1px solid #2096F3;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
 }
+
+.deleteButton {
+  background-color: #f32720;
+  border-color: #f32720;
+}
 #editor{
   position: relative;
   padding: 0;

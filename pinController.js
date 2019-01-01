@@ -53,6 +53,14 @@ module.exports = (http, fm) => {
       socket.on('edit', () => {
         executer.stop();
       });
+      socket.on('delete', (fileName) => {
+        try {
+          fm.deleteFile(fileName);
+          socket.emit('delete res', false);
+        } catch (e) {
+          socket.emit('delete res', e);
+        }
+      })
     }
   });
 };
