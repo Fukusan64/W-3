@@ -12,7 +12,7 @@ module.exports = class FileManager {
     ;
   }
   readFile(fileName) {
-    return fs.readFileSync(path.join(this.dirPath, fileName));
+    return fs.readFileSync(path.join(this.dirPath, fileName), 'utf8');
   }
   writeFile(fileName, body) {
     fs.writeFileSync(path.join(this.dirPath, fileName), body);

@@ -19,13 +19,11 @@ app.get('/program/:name', (req, res) => {
   if (fm.getFileList().some(e => e == req.params.name)) {
     res.render("./program.ejs", {
       name: req.params.name,
-      body: fm.readFile(req.params.name),
       newFile: false,
     });
   } else {
     res.render("./program.ejs", {
       name: req.params.name,
-      body: '',
       newFile: true,
     });
   }

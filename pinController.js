@@ -20,6 +20,9 @@ module.exports = (http, fm) => {
       }, 2000);
       setTimeout(() => socket.disconnect(true), 5000);
     } else {
+      socket.on('load req', (fileName) => {
+        socket.emit('load', fm.readFile(fileName));
+      });
       socket.on('exec', (data) => {
         try {
           const [pinMap, tasks] = parser(data);

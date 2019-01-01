@@ -13,7 +13,7 @@
     <button id="closeMessage">x 閉じる</button>
   </div>
 	<div id="editor">
-    <textarea><%= body %></textarea>
+    <textarea readonly></textarea>
     <a id="backLink" href="/">一覧</a>
   </div>
   <div id="exec">
@@ -30,7 +30,10 @@
     <button id="modeButton" class="button">編集</button>
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script>const NAME = '<%= name %>'</script>
+  <script>
+    const NAME = '<%= name %>';
+    const IS_NEW_PROGRAM = <%= newFile %>;
+  </script>
 	<script src="/static/js/program.js"></script>
 </body>
 </html>

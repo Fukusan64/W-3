@@ -53,8 +53,15 @@ const init = () => {
   document.getElementById('saveButton').addEventListener('click', () => {
     socket.emit('save', {name: NAME, body: document.getElementById('editor').children[0].value});
   });
-  document.getElementById('deleteButton').addEventListener('click', () => {
-    socket.emit('delete', NAME);
+  if (!IS_NEW_PROGRAM) {
+    document.getElementById('deleteButton').addEventListener('click', () => {
+      socket.emit('delete', NAME);
+    });
+  }
+  socket.on('load', (code) => {
+    const textarea = document.getElementById('editor').children[0];
+    textarea.value = code;
+    textarea.readOnly = false;
   });
   socket.on('delete res', (e) => {
     if(e) {
@@ -77,6 +84,12 @@ const init = () => {
   socket.on('info', (data) => message(data, 0, 1));
   socket.on('warn', (data) => message(data, 1));
   socket.on('error', (data) => message(data, 2));
+
+  if (IS_NEW_PROGRAM) {
+    document.getElementById('editor').children[0].readOnly = false;
+  } else {
+    socket.emit('load req', NAME);
+  }
 }
 
 window.onload = () => {
