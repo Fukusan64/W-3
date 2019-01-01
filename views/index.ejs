@@ -7,10 +7,17 @@
   <title>W*3</title>
 </head>
 <body>
+  <h1>新規作成</h1>
+  <form id="newProgram">
+    <input type="text" id="name">
+    <button type="submit">作成</button>
+  </form>
+  <h1>プログラム一覧</h1>
   <lu>
     <% fileList.forEach(e => { %>
       <li><a href="./program/<%= e %>"><%= e %></a></li>
     <% }); %>
   </lu>
+  <script src="/static/js/index.js"></script>
 </body>
 </html>
