@@ -75,10 +75,10 @@
         setTimeout(()=> window.location.href='/', 3000);
       }
     });
-    socket.on('connect', () => message('W*3本体へ接続成功！', 0, 1));
+    socket.on('connect', () => message('WWC本体へ接続成功！', 0, 1));
     socket.on('disconnect', () => {
       if (!deleteFlag) {
-        message('W*3本体との通信が切断されました', 2);
+        message('WWC本体との通信が切断されました', 2);
       }
     });
 
